@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistencias técnicas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="dashboard">
+    <aside class="sidebar">
+        <h2>Control de Fallas</h2>
+        <nav>
+            <a href="dashboard.html">Inicio</a>
+            <a href="clientes.html">Clientes</a>
+            <a href="instalaciones.html">Instalaciones</a>
+            <a href="equipos.html">Equipos</a>
+            <a href="ordenes.html">Órdenes de servicio</a>
+            <a href="asistencias.html">Asistencias técnicas</a>
+            <a href="fallas.html">Fallas</a>
+            <a href="soluciones.html">Soluciones</a>
+            <a href="materiales.html">Materiales</a>
+            <a href="tecnicos.html">Técnicos</a>
+            <a href="usuarios.html">Usuarios</a>
+        </nav>
+        <button onclick="cerrarSesion()">Cerrar sesión</button>
+    </aside>
+
+    <main class="contenido">
+        <header class="encabezado-pagina">
+            <div>
+                <h1>Asistencias técnicas</h1>
+                <p id="usuarioActual"></p>
+            </div>
+            <div class="acciones-toolbar">
+                <button class="boton-exito" onclick="abrirNuevaAsistencia()">Nueva asistencia</button>
+                <button onclick="cargarAsistencias()">Actualizar</button>
+            </div>
+        </header>
+
+        <section class="panel-filtro">
+            <label for="buscarDocumento"><strong>Buscar historial por identificación, cliente u orden</strong></label>
+            <input id="buscarDocumento" type="text" placeholder="Identificación, nombre u orden" oninput="filtrarAsistencias()">
+            <div class="acciones-toolbar" style="margin-top:10px;">
+                <button class="boton-secundario" onclick="limpiarFiltro()">Mostrar todos</button>
+            </div>
+            <p id="resultadoFiltro" style="margin-top:10px;"></p>
+        </section>
+
+        <section id="tablaAsistencias" class="seccion-datos"><p>Cargando asistencias...</p></section>
+    </main>
+</div>
+
+<div id="modalAsistencia" class="modal-fondo">
+    <div class="modal-caja">
+        <h2 id="tituloAsistencia">Nueva asistencia técnica</h2>
+        <input type="hidden" id="idAsistencia">
+        <div class="form-grid" style="margin-top:18px;">
+            <div class="campo-completo">
+                <label>Orden de servicio *</label>
+                <select id="idOrdenAsistencia" onchange="sincronizarTecnicoOrden()"></select>
+            </div>
+            <div>
+                <label>Técnico *</label>
+                <select id="idTecnicoAsistencia"></select>
+            </div>
+            <div>
+                <label>Fecha *</label>
+                <input type="date" id="fechaAsistencia">
+            </div>
+            <div>
+                <label>Hora inicio *</label>
+                <input type="time" step="1" id="horaInicio">
+            </div>
+            <div>
+                <label>Hora fin</label>
+                <input type="time" step="1" id="horaFin">
+            </div>
+            <div>
+                <label>Estado *</label>
+                <select id="estadoServicio">
+                    <option value="EN PROCESO">EN PROCESO</option>
+                    <option value="FINALIZADO">FINALIZADO</option>
+                </select>
+            </div>
+            <div class="campo-completo">
+                <label>Diagnóstico *</label>
+                <textarea id="diagnostico"></textarea>
+            </div>
+            <div class="campo-completo">
+                <label>Observaciones</label>
+                <textarea id="observaciones"></textarea>
+            </div>
+        </div>
+        <p id="mensajeAsistencia" style="margin-top:15px;"></p>
+        <div class="modal-acciones">
+            <button class="boton-secundario" onclick="cerrarModal('modalAsistencia')">Cancelar</button>
+            <button class="boton-exito" onclick="guardarAsistencia()">Guardar asistencia</button>
+        </div>
+    </div>
+</div>
+
+<div id="modalOperacion" class="modal-fondo">
+    <div class="modal-caja" id="contenidoOperacion"></div>
+</div>
+
+<script src="asistencias.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+const u=JSON.parse(localStorage.getItem('usuario'));if(!u)location.href='/';
+document.getElementById('usuarioActual').textContent=`Sesión: ${u.nombreUsuario||'Usuario'}${u.nombreRol?' · '+u.nombreRol:''}`;
+document.addEventListener('DOMContentLoaded',async()=>{try{
+ const urls=['/clientes','/ordenes-servicio','/asistencias-tecnicas','/tecnicos','/asistencia-fallas','/tipos-falla'];
+ const rs=await Promise.all(urls.map(x=>fetch(x))); const [c,o,a,t,af,tf]=await Promise.all(rs.map(x=>x.json()));
+ const activos=a.filter(x=>normalizarEstado(x)!=='ANULADO');
+ const res=activos.filter(x=>normalizarEstado(x)==='RESUELTO').length;
+ const pend=activos.filter(x=>['PENDIENTE','EN PROCESO'].includes(normalizarEstado(x))).length;
+ const porCliente={}; o.forEach(x=>porCliente[x.idCliente]=(porCliente[x.idCliente]||0)+1); const reinc=Object.values(porCliente).filter(n=>n>1).length;
+ document.getElementById('indicadores').innerHTML=card('Usuarios atendidos',new Set(o.map(x=>x.idCliente)).size)+card('Atenciones registradas',activos.length)+card('Servicios resueltos',res)+card('Pendientes / en proceso',pend)+card('Usuarios con reincidencia',reinc);
+ const mapaFallas=new Map(tf.map(x=>[Number(x.idTipoFalla),x])); const count={};
+ af.filter(x=>activos.some(a=>Number(a.idAsistencia)===Number(x.idAsistencia))).forEach(x=>{const f=mapaFallas.get(Number(x.idTipoFalla));const n=componenteEstandar(f);count[n]=(count[n]||0)+1});
+ const top=Object.entries(count).sort((a,b)=>b[1]-a[1]); document.getElementById('fallasFrecuentes').innerHTML=top.length?`<div class="table-wrap"><table class="clean-table"><thead><tr><th>Componente</th><th>Registros</th></tr></thead><tbody>${top.map(([n,v])=>`<tr><td>${e(n)}</td><td><strong>${v}</strong></td></tr>`).join('')}</tbody></table></div>`:'<p class="empty-state">Aún no hay fallas suficientes para mostrar tendencias.</p>';
+ const mc=new Map(c.map(x=>[Number(x.idCliente),x])),mo=new Map(o.map(x=>[Number(x.idOrden),x])); const ult=[...a].sort((x,y)=>Number(y.idAsistencia)-Number(x.idAsistencia)).slice(0,8);
+ document.getElementById('seguimiento').innerHTML=ult.length?`<div class="table-wrap"><table class="clean-table"><thead><tr><th>Orden</th><th>Identificación</th><th>Usuario</th><th>Fecha</th><th>Estado</th></tr></thead><tbody>${ult.map(x=>{const ord=mo.get(Number(x.idOrden)),cli=ord?mc.get(Number(ord.idCliente)):null,estado=normalizarEstado(x);return `<tr><td>${e(ord?.numeroOrden)}</td><td>${e(cli?.numeroDocumento)}</td><td>${e(n(cli))}</td><td>${e(x.fechaAsistencia)}</td><td><span class="status-pill ${estado==='RESUELTO'?'ok':'warn'}">${e(estado)}</span></td></tr>`}).join('')}</tbody></table></div>`:'<p class="empty-state">Todavía no hay atenciones registradas.</p>';
+}catch(err){console.error(err);document.getElementById('indicadores').innerHTML='<p>No fue posible cargar indicadores.</p>'}});
+function normalizarEstado(x){const v=String(x?.resultadoServicio||x?.estadoServicio||'PENDIENTE').toUpperCase();return v==='FINALIZADO'?'RESUELTO':v} function card(t,n){return `<div class="metric-card"><span>${e(t)}</span><strong>${n}</strong></div>`} function n(x){return x?`${x.nombres||''} ${x.apellidos||''}`.trim():'—'} function e(x){return String(x??'—').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+function componenteEstandar(f){const c=String(f?.categoria||'').toLowerCase(),n=String(f?.nombreFalla||'').toLowerCase(),x=c+' '+n;if(x.includes('sin falla'))return 'Sin falla detectada';if(x.includes('tap')&&x.includes('ampl'))return 'TAP/Amplificador';if(x.includes('cable'))return 'Cableado';if(x.includes('conector'))return 'Conectores';if(x.includes('antena'))return 'Antena';if(x.includes('lnb'))return 'LNB';if(x.includes('decod')||x.includes('tarjeta')||x.includes('hdmi')||x.includes('video'))return 'Decodificador';if(x.includes('tap'))return 'TAP';if(x.includes('ampl')||x.includes('switch'))return 'Amplificador';return f?.categoria||'Otros'}
