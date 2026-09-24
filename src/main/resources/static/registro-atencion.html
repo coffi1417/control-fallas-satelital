@@ -6,74 +6,530 @@
   <title>Registrar atención</title>
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body class="app-body">
+
 <div class="app-shell">
+
   <aside class="app-sidebar">
-    <div class="brand-block"><div class="brand-mark">RF</div><div><strong>Control Satelital</strong><small>Registro de fallas</small></div></div>
-    <nav class="simple-nav"><a href="dashboard.html">Inicio</a><a class="active" href="registro-atencion.html">Registrar atención</a><a href="historial.html">Ficha del usuario</a><a data-admin-only style="display:none" href="gestion-tecnicos.html">Gestión de técnicos</a></nav>
-    <button class="logout-btn" onclick="localStorage.removeItem('usuario');location.href='/'">Cerrar sesión</button>
+
+    <div class="brand-block">
+      <div class="brand-mark">RF</div>
+
+      <div>
+        <strong>Control Satelital</strong>
+        <small>Registro de fallas</small>
+      </div>
+    </div>
+
+    <nav class="simple-nav">
+      <a href="dashboard.html">Inicio</a>
+
+      <a class="active" href="registro-atencion.html">
+        Registrar atención
+      </a>
+
+      <a href="historial.html">
+        Ficha del usuario
+      </a>
+
+      <a
+        data-admin-only
+        style="display:none"
+        href="gestion-tecnicos.html">
+        Gestión de técnicos
+      </a>
+    </nav>
+
+    <button
+      class="logout-btn"
+      onclick="localStorage.removeItem('usuario');location.href='/'">
+      Cerrar sesión
+    </button>
+
   </aside>
 
+
   <main class="app-main form-page">
+
     <header class="page-header">
-      <div><p class="eyebrow">Registro posterior a la visita técnica</p><h1>Registrar atención realizada</h1><p>Transcriba los datos principales de la orden que ya fue generada por la empresa y registre el resultado de la intervención.</p></div>
-      <a class="back-link" href="dashboard.html">← Volver al inicio</a>
+
+      <div>
+        <p class="eyebrow">
+          Registro posterior a la visita técnica
+        </p>
+
+        <h1>Registrar atención realizada</h1>
+
+        <p>
+          Transcriba los datos principales de la orden que ya fue
+          generada por la empresa y registre el resultado de la intervención.
+        </p>
+      </div>
+
+      <a class="back-link" href="dashboard.html">
+        ← Volver al inicio
+      </a>
+
     </header>
 
-    <form id="formAtencion" class="record-form" onsubmit="guardarAtencion(event)">
+
+    <form
+      id="formAtencion"
+      class="record-form"
+      onsubmit="guardarAtencion(event)">
+
+
+      <!-- =============================== -->
+      <!-- 1. USUARIO Y ORDEN              -->
+      <!-- =============================== -->
+
       <section class="form-section highlight-section">
-        <div class="section-title"><span class="step-badge">1</span><div><h2>Usuario y orden de servicio</h2><p>Empiece por la identificación. Si el usuario ya existe, sus datos se cargan automáticamente.</p></div></div>
+
+        <div class="section-title">
+
+          <span class="step-badge">1</span>
+
+          <div>
+            <h2>Usuario y orden de servicio</h2>
+
+            <p>
+              Empiece por la identificación. Si el usuario ya existe,
+              sus datos se cargan automáticamente.
+            </p>
+          </div>
+
+        </div>
+
+
         <div class="identity-search">
-          <div class="field field-search"><label>Identificación del usuario *</label><div class="search-control"><input id="numeroDocumento" required placeholder="Cédula o identificación"><button type="button" onclick="buscarCliente()">Buscar</button></div><small id="estadoBusqueda"></small></div>
-          <div class="field"><label>Número de orden *</label><input id="numeroOrden" required placeholder="Ej. 15478523"></div>
+
+          <div class="field field-search">
+
+            <label>
+              Identificación del usuario *
+            </label>
+
+            <div class="search-control">
+
+              <input
+                id="numeroDocumento"
+                required
+                placeholder="Cédula o identificación">
+
+              <button
+                type="button"
+                onclick="buscarCliente()">
+                Buscar
+              </button>
+
+            </div>
+
+            <small id="estadoBusqueda"></small>
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              Número de orden *
+            </label>
+
+            <input
+              id="numeroOrden"
+              required
+              placeholder="Ej. 15478523">
+
+          </div>
+
         </div>
+
+
         <div class="form-grid-modern cols-4">
-          <div class="field"><label>Nombres *</label><input id="nombres" required></div>
-          <div class="field"><label>Apellidos</label><input id="apellidos"></div>
-          <div class="field"><label>Teléfono</label><input id="telefono"></div>
-          <div class="field"><label>Correo</label><input id="correo" type="email"></div>
-          <div class="field span-2"><label>Dirección del servicio *</label><input id="direccion" required></div>
-          <div class="field"><label>Barrio</label><input id="barrio"></div>
-          <div class="field"><label>Ciudad *</label><input id="ciudad" required></div>
-          <div class="field"><label>Departamento</label><input id="departamento"></div>
+
+          <div class="field">
+            <label>Nombres *</label>
+            <input id="nombres" required>
+          </div>
+
+          <div class="field">
+            <label>Apellidos</label>
+            <input id="apellidos">
+          </div>
+
+          <div class="field">
+            <label>Teléfono</label>
+            <input id="telefono">
+          </div>
+
+          <div class="field">
+            <label>Correo</label>
+            <input id="correo" type="email">
+          </div>
+
+          <div class="field span-2">
+            <label>Dirección del servicio *</label>
+            <input id="direccion" required>
+          </div>
+
+          <div class="field">
+            <label>Barrio</label>
+            <input id="barrio">
+          </div>
+
+          <div class="field">
+            <label>Ciudad *</label>
+            <input id="ciudad" required>
+          </div>
+
+          <div class="field">
+            <label>Departamento</label>
+            <input id="departamento">
+          </div>
+
         </div>
+
       </section>
+
+
+      <!-- =============================== -->
+      <!-- 2. ATENCIÓN REALIZADA           -->
+      <!-- =============================== -->
 
       <section class="form-section">
-        <div class="section-title"><span class="step-badge">2</span><div><h2>Atención realizada</h2><p>Registre quién atendió la visita y qué reportó inicialmente el usuario.</p></div></div>
-        <div class="form-grid-modern cols-3">
-          <div class="field"><label>Nombre del técnico *</label><input id="tecnicoNombre" required placeholder="Escriba nombre y apellido"><small>Campo libre para registrar el técnico que realizó la atención.</small></div>
-          <div class="field"><label>Fecha de atención *</label><input id="fechaAtencion" required type="date"></div>
-          <div class="field"><label>Tipo de servicio</label><input id="tipoServicio" value="Asistencia técnica" readonly class="readonly-field"></div>
-          <div class="field span-3"><label>Motivo reportado por el usuario *</label><textarea id="motivo" required placeholder="Ej. El usuario reporta que el decodificador no enciende."></textarea></div>
+
+        <div class="section-title">
+
+          <span class="step-badge">2</span>
+
+          <div>
+
+            <h2>Atención realizada</h2>
+
+            <p>
+              Registre quién atendió la visita y qué reportó
+              inicialmente el usuario.
+            </p>
+
+          </div>
+
         </div>
+
+
+        <div class="form-grid-modern cols-3">
+
+          <div class="field">
+
+            <label>
+              Nombre del técnico *
+            </label>
+
+            <input
+              id="tecnicoNombre"
+              required
+              placeholder="Escriba nombre y apellido">
+
+            <small>
+              Campo libre para registrar el técnico que realizó la atención.
+            </small>
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              Fecha de atención *
+            </label>
+
+            <input
+              id="fechaAtencion"
+              required
+              type="date">
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              Tipo de servicio
+            </label>
+
+            <input
+              id="tipoServicio"
+              value="Asistencia técnica"
+              readonly
+              class="readonly-field">
+
+          </div>
+
+
+          <div class="field span-3">
+
+            <label>
+              Motivo reportado por el usuario *
+            </label>
+
+            <textarea
+              id="motivo"
+              required
+              placeholder="Ej. El usuario reporta que el decodificador no enciende."></textarea>
+
+          </div>
+
+        </div>
+
       </section>
+
+
+      <!-- =============================== -->
+      <!-- 3. DIAGNÓSTICO                  -->
+      <!-- =============================== -->
 
       <section class="form-section diagnosis-section">
-        <div class="section-title"><span class="step-badge">3</span><div><h2>Diagnóstico, falla y solución</h2><p>Seleccione la falla encontrada. Las soluciones sugeridas se filtran según esa falla.</p></div></div>
-        <div class="form-grid-modern cols-2">
-          <div class="field"><label>Falla encontrada *</label><select id="falla" required onchange="filtrarSoluciones()"><option value="">Seleccione una falla</option></select></div>
-          <div class="field"><label>Solución aplicada *</label><select id="solucion" required><option value="">Seleccione una solución</option></select></div>
-          <div class="field"><label>Detalle de la falla</label><textarea id="detalleFalla" placeholder="Detalle adicional del diagnóstico"></textarea></div>
-          <div class="field"><label>Detalle de la solución</label><textarea id="detalleSolucion" placeholder="Explique brevemente qué se realizó"></textarea></div>
-          <div class="field"><label>Resultado del servicio *</label><select id="resultado" required><option value="RESUELTO">Resuelto</option><option value="EN PROCESO">En proceso</option><option value="PENDIENTE">Pendiente</option></select></div>
-          <div class="field"><label>Observaciones generales</label><textarea id="observaciones" placeholder="Información adicional de la atención"></textarea></div>
+
+        <div class="section-title">
+
+          <span class="step-badge">3</span>
+
+          <div>
+
+            <h2>
+              Diagnóstico, falla y solución
+            </h2>
+
+            <p>
+              Seleccione la falla encontrada. Las soluciones sugeridas
+              se filtran según esa falla.
+            </p>
+
+          </div>
+
         </div>
+
+
+        <div class="form-grid-modern cols-2">
+
+
+          <!-- FALLA -->
+
+          <div class="field">
+
+            <label>
+              Falla encontrada *
+            </label>
+
+            <select
+              id="falla"
+              required
+              onchange="filtrarSoluciones()">
+
+              <option value="">
+                Seleccione una falla
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <!-- SOLUCIÓN -->
+
+          <div class="field">
+
+            <label>
+              Solución aplicada
+            </label>
+
+            <select id="solucion">
+
+              <option value="">
+                Seleccione una solución
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <!-- DETALLE FALLA -->
+
+          <div class="field">
+
+            <label>
+              Detalle de la falla
+            </label>
+
+            <textarea
+              id="detalleFalla"
+              placeholder="Detalle adicional del diagnóstico"></textarea>
+
+          </div>
+
+
+          <!-- DETALLE SOLUCIÓN -->
+
+          <div class="field">
+
+            <label>
+              Detalle de la solución
+            </label>
+
+            <textarea
+              id="detalleSolucion"
+              placeholder="Explique brevemente qué se realizó"></textarea>
+
+          </div>
+
+
+          <!-- RESULTADO -->
+
+          <div class="field">
+
+            <label>
+              Resultado del servicio *
+            </label>
+
+            <select
+              id="resultado"
+              required
+              onchange="actualizarCamposResultado()">
+
+              <option value="RESUELTO">
+                Resuelto
+              </option>
+
+              <option value="EN PROCESO">
+                En proceso
+              </option>
+
+              <option value="PENDIENTE">
+                Pendiente
+              </option>
+
+              <option value="ANULADA">
+                Anulada
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <!-- OBSERVACIONES -->
+
+          <div class="field">
+
+            <label>
+              Observaciones generales
+            </label>
+
+            <textarea
+              id="observaciones"
+              placeholder="Información adicional de la atención"></textarea>
+
+          </div>
+
+
+          <!-- MOTIVO DEL ESTADO -->
+
+          <div
+            class="field span-2"
+            id="campoMotivoEstado"
+            style="display:none">
+
+            <label id="labelMotivoEstado">
+              Motivo *
+            </label>
+
+            <textarea
+              id="motivoEstado"
+              placeholder="Explique el motivo"></textarea>
+
+            <small id="ayudaMotivoEstado"></small>
+
+          </div>
+
+        </div>
+
       </section>
+
+
+      <!-- =============================== -->
+      <!-- 4. MATERIALES                   -->
+      <!-- =============================== -->
 
       <section class="form-section materials-section">
-        <div class="section-title"><span class="step-badge">4</span><div><h2>Materiales utilizados</h2><p>Registre solo lo realmente utilizado. Puede agregar varios materiales.</p></div></div>
-        <div id="materialRows" class="material-rows"></div>
-        <button type="button" class="secondary-action" onclick="agregarMaterial()">+ Agregar otro material</button>
+
+        <div class="section-title">
+
+          <span class="step-badge">4</span>
+
+          <div>
+
+            <h2>
+              Materiales utilizados
+            </h2>
+
+            <p>
+              Registre solo lo realmente utilizado.
+              Puede agregar varios materiales.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="materialRows"
+          class="material-rows">
+        </div>
+
+
+        <button
+          type="button"
+          class="secondary-action"
+          onclick="agregarMaterial()">
+
+          + Agregar otro material
+
+        </button>
+
       </section>
 
+
+      <!-- =============================== -->
+      <!-- GUARDAR                         -->
+      <!-- =============================== -->
+
       <div class="form-footer">
+
         <p id="mensajeGuardar"></p>
-        <button id="btnGuardar" type="submit" class="save-record">Guardar atención completa</button>
+
+        <button
+          id="btnGuardar"
+          type="submit"
+          class="save-record">
+
+          Guardar atención completa
+
+        </button>
+
       </div>
+
+
     </form>
+
   </main>
+
 </div>
-<script src="roles-ui.js"></script><script src="registro-atencion.js"></script>
+
+
+<script src="roles-ui.js"></script>
+<script src="registro-atencion.js"></script>
+
 </body>
 </html>
