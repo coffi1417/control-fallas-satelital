@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Órdenes de servicio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="dashboard">
+    <aside class="sidebar">
+        <h2>Control de Fallas</h2>
+        <nav>
+            <a href="dashboard.html">Inicio</a>
+            <a href="clientes.html">Clientes</a>
+            <a href="instalaciones.html">Instalaciones</a>
+            <a href="equipos.html">Equipos</a>
+            <a href="ordenes.html">Órdenes de servicio</a>
+            <a href="asistencias.html">Asistencias técnicas</a>
+            <a href="fallas.html">Fallas</a>
+            <a href="soluciones.html">Soluciones</a>
+            <a href="materiales.html">Materiales</a>
+            <a href="tecnicos.html">Técnicos</a>
+            <a href="usuarios.html">Usuarios</a>
+        </nav>
+        <button onclick="cerrarSesion()">Cerrar sesión</button>
+    </aside>
+
+    <main class="contenido">
+        <header class="encabezado-pagina">
+            <div>
+                <h1>Órdenes de servicio</h1>
+                <p id="usuarioActual"></p>
+            </div>
+            <div class="acciones-toolbar">
+                <button class="boton-exito" onclick="abrirNuevaOrden()">Nueva orden</button>
+                <button onclick="cargarOrdenes()">Actualizar</button>
+            </div>
+        </header>
+
+        <section class="panel-filtro">
+            <label for="buscarOrden"><strong>Buscar por identificación, cliente o número de orden</strong></label>
+            <input id="buscarOrden" type="text" placeholder="Escriba para filtrar" oninput="filtrarOrdenes()">
+            <p id="resultadoOrdenes" style="margin-top:10px;"></p>
+        </section>
+
+        <section id="tablaOrdenes" class="seccion-datos"><p>Cargando órdenes...</p></section>
+    </main>
+</div>
+
+<div id="modalOrden" class="modal-fondo">
+    <div class="modal-caja">
+        <h2 id="tituloOrden">Nueva orden de servicio</h2>
+        <input id="idOrden" type="hidden">
+        <div class="form-grid" style="margin-top:18px;">
+            <div>
+                <label>Número de orden *</label>
+                <input id="numeroOrden" type="text" placeholder="Ej. OS-2026-003">
+            </div>
+            <div>
+                <label>Cliente *</label>
+                <select id="idCliente" onchange="actualizarInstalacionesCliente()"></select>
+            </div>
+            <div>
+                <label>Instalación</label>
+                <select id="idInstalacion"></select>
+            </div>
+            <div>
+                <label>Técnico asignado</label>
+                <select id="idTecnicoAsignado"></select>
+            </div>
+            <div>
+                <label>Tipo de servicio *</label>
+                <input id="tipoServicio" type="text" placeholder="Ej. Soporte técnico">
+            </div>
+            <div>
+                <label>Prioridad *</label>
+                <select id="prioridad">
+                    <option value="BAJA">BAJA</option>
+                    <option value="MEDIA" selected>MEDIA</option>
+                    <option value="ALTA">ALTA</option>
+                </select>
+            </div>
+            <div>
+                <label>Estado *</label>
+                <select id="estadoOrden">
+                    <option value="PENDIENTE">PENDIENTE</option>
+                    <option value="EN PROCESO">EN PROCESO</option>
+                    <option value="CERRADA">CERRADA</option>
+                </select>
+            </div>
+            <div>
+                <label>Fecha programada</label>
+                <input id="fechaProgramada" type="datetime-local">
+            </div>
+            <div class="campo-completo">
+                <label>Motivo / problema reportado *</label>
+                <textarea id="descripcionProblema" placeholder="Describa el motivo del servicio"></textarea>
+            </div>
+            <div class="campo-completo">
+                <label>Observaciones de cierre</label>
+                <textarea id="observacionesCierre"></textarea>
+            </div>
+        </div>
+        <p id="mensajeOrden" style="margin-top:15px;"></p>
+        <div class="modal-acciones">
+            <button class="boton-secundario" onclick="cerrarModalOrden()">Cancelar</button>
+            <button class="boton-exito" onclick="guardarOrden()">Guardar orden</button>
+        </div>
+    </div>
+</div>
+<script src="ordenes.js"></script>
+</body>
+</html>

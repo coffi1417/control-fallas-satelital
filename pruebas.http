@@ -1,0 +1,1223 @@
+### Crear usuario
+POST http://localhost:8080/usuarios
+Content-Type: application/json
+
+{
+  "nombreUsuario": "Vicente3",
+  "correo": "vicente3@gmail.com",
+  "contrasena": "123456",
+  "estado": true,
+  "rol": {
+    "idRol": 1
+  }
+}
+
+### Listar usuarios
+GET http://localhost:8080/usuarios
+
+### Buscar usuario por ID
+GET http://localhost:8080/usuarios
+
+### Actualizar usuario
+PUT http://localhost:8080/usuarios
+Content-Type: application/json
+
+{
+  "nombreUsuario": "Vicente Actualizado",
+  "correo": "vicente_actualizado@gmail.com",
+  "contrasena": "654321",
+  "estado": true,
+  "rol": {
+    "idRol": 1
+  }
+}
+### Eliminar usuario por ID
+DELETE http://localhost:8080/usuarios/14
+
+### Verificar usuario eliminado
+GET http://localhost:8080/usuarios/14
+### Probar usuario que no existe
+GET http://localhost:8080/usuarios/14
+### Login de usuario
+POST http://localhost:8080/usuarios/login
+Content-Type: application/json
+
+{
+  "correo": "vicente_actualizado@gmail.com",
+  "contrasena": "654321"
+}
+### Crear usuario de prueba con BCrypt
+POST http://localhost:8080/usuarios
+Content-Type: application/json
+
+{
+  "nombreUsuario": "Prueba BCrypt 2",
+  "correo": "bcrypt2@prueba.com",
+  "contrasena": "123456",
+  "estado": true,
+  "rol": {
+    "idRol": 1
+  }
+}
+### Probar login con BCrypt
+POST http://localhost:8080/usuarios/login
+Content-Type: application/json
+
+{
+  "correo": "bcrypt2@prueba.com",
+  "contrasena": "123456"
+}
+### =========================
+### CREAR TIPO DE FALLA
+### =========================
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+  "nombreFalla": "Señal débil",
+  "descripcion": "Pérdida parcial de intensidad de señal",
+  "categoria": "Señal",
+  "estado": true
+}
+
+
+### =========================
+### LISTAR TIPOS DE FALLA
+### =========================
+GET http://localhost:8080/tipos-falla
+
+
+### =========================
+### BUSCAR TIPO DE FALLA POR ID
+### =========================
+GET http://localhost:8080/tipos-falla/1
+
+
+### =========================
+### ACTUALIZAR TIPO DE FALLA
+### =========================
+PUT http://localhost:8080/tipos-falla/1
+Content-Type: application/json
+
+{
+  "nombreFalla": "Señal débil actualizada",
+  "descripcion": "Pérdida parcial o intermitente de señal",
+  "categoria": "Señal",
+  "estado": true
+}
+
+
+### =========================
+### ELIMINAR TIPO DE FALLA
+### =========================
+DELETE http://localhost:8080/tipos-falla/1
+
+### ========================================
+### CREAR TECNICO
+### ========================================
+
+POST http://localhost:8080/tecnicos
+Content-Type: application/json
+
+{
+    "usuario": null,
+    "nombres": "Carlos",
+    "apellidos": "Ramirez",
+    "tipoDocumento": "CC",
+    "numeroDocumento": "100000001",
+    "telefono": "3001234567",
+    "correo": "carlos.tecnico@prueba.com",
+    "direccion": "Calle 10 # 20-30",
+    "ciudad": "Medellin",
+    "cargo": "Tecnico de campo",
+    "fechaIngreso": "2026-08-19",
+    "estado": true
+}
+
+
+### ========================================
+### LISTAR TECNICOS
+### ========================================
+
+GET http://localhost:8080/tecnicos
+
+
+### ========================================
+### BUSCAR TECNICO POR ID
+### ========================================
+
+GET http://localhost:8080/tecnicos/1
+
+
+### ========================================
+### ACTUALIZAR TECNICO
+### ========================================
+
+PUT http://localhost:8080/tecnicos/1
+Content-Type: application/json
+
+{
+    "usuario": null,
+    "nombres": "Carlos",
+    "apellidos": "Ramirez",
+    "tipoDocumento": "CC",
+    "numeroDocumento": "100000001",
+    "telefono": "3009999999",
+    "correo": "carlos.actualizado@prueba.com",
+    "direccion": "Carrera 50 # 40-20",
+    "ciudad": "Medellin",
+    "cargo": "Tecnico Senior",
+    "fechaIngreso": "2026-08-19",
+    "estado": true
+}
+
+
+### ========================================
+### ELIMINAR TECNICO
+### ========================================
+
+DELETE http://localhost:8080/tecnicos/1
+
+### ============================================
+### CREAR EQUIPO
+### ============================================
+
+POST http://localhost:8080/equipos
+Content-Type: application/json
+
+{
+  "tipoEquipo": "Router",
+  "marca": "Cisco",
+  "modelo": "ISR4321",
+  "serialEquipo": "EQ-TEST-002",
+  "serialTarjeta": "TARJ-TEST-002",
+  "codigoInventario": "INV-TEST-002",
+  "estado": "ACTIVO",
+  "observaciones": "Equipo creado para pruebas del sistema"
+}
+
+
+### ============================================
+### LISTAR EQUIPOS
+### ============================================
+
+GET http://localhost:8080/equipos
+
+
+### ============================================
+### BUSCAR EQUIPO POR ID
+### ============================================
+
+GET http://localhost:8080/equipos/1
+
+
+### ============================================
+### ACTUALIZAR EQUIPO
+### ============================================
+
+PUT http://localhost:8080/equipos/1
+Content-Type: application/json
+
+{
+  "tipoEquipo": "Router",
+  "marca": "Cisco",
+  "modelo": "ISR4321-SEC",
+  "serialEquipo": "EQ-TEST-001",
+  "serialTarjeta": "TARJ-TEST-001",
+  "codigoInventario": "INV-TEST-001",
+  "estado": "MANTENIMIENTO",
+  "observaciones": "Equipo actualizado correctamente"
+}
+
+
+### ============================================
+### ELIMINAR EQUIPO
+### ============================================
+
+DELETE http://localhost:8080/equipos/1
+
+### ============================================
+### CREAR INSTALACION
+### ============================================
+
+POST http://localhost:8080/instalaciones
+Content-Type: application/json
+
+{
+  "idCliente": 6,
+  "idTecnico": null,
+  "fechaInstalacion": "2026-08-19",
+  "tipoInstalacion": "Satelital",
+  "direccionInstalacion": "Calle 50 # 40-30",
+  "ciudad": "Medellin",
+  "estado": "ACTIVA",
+  "observaciones": "Instalacion creada para pruebas"
+}
+
+
+### ============================================
+### LISTAR INSTALACIONES
+### ============================================
+
+GET http://localhost:8080/instalaciones
+
+
+### ============================================
+### BUSCAR INSTALACION POR ID
+### ============================================
+
+GET http://localhost:8080/instalaciones/3
+
+
+### ============================================
+### ACTUALIZAR INSTALACION
+### ============================================
+
+PUT http://localhost:8080/instalaciones/3
+Content-Type: application/json
+
+{
+  "idCliente": 4,
+  "idTecnico": null,
+  "fechaInstalacion": "2026-08-19",
+  "tipoInstalacion": "Satelital",
+  "direccionInstalacion": "Carrera 60 # 30-20",
+  "ciudad": "Medellin",
+  "estado": "MANTENIMIENTO",
+  "observaciones": "Instalacion actualizada correctamente"
+}
+
+
+### ============================================
+### ELIMINAR INSTALACION
+### ============================================
+
+DELETE http://localhost:8080/instalaciones/3
+
+### VERIFICAR INSTALACION ELIMINADA
+GET http://localhost:8080/instalaciones/3
+
+### ==============================
+### CREAR CLIENTE
+### ==============================
+
+POST http://localhost:8080/clientes
+Content-Type: application/json
+
+{
+  "nombres": "Empresa Satelital",
+  "apellidos": "Prueba",
+  "tipoDocumento": "NIT",
+  "numeroDocumento": "900123456",
+  "telefono": "3001234567",
+  "correo": "cliente@prueba.com",
+  "direccion": "Calle 50 # 40-30",
+  "barrio": "Centro",
+  "ciudad": "Medellin",
+  "departamento": "Antioquia",
+  "estado": true
+}
+
+### ==============================
+### LISTAR CLIENTES
+### ==============================
+
+GET http://localhost:8080/clientes
+
+### ==============================
+### BUSCAR CLIENTE POR ID
+### ==============================
+
+GET http://localhost:8080/clientes/1
+
+### ==============================
+### ACTUALIZAR CLIENTE
+### ==============================
+
+PUT http://localhost:8080/clientes/1
+Content-Type: application/json
+
+{
+  "nombres": "Empresa Satelital Actualizada",
+  "apellidos": "Prueba",
+  "tipoDocumento": "NIT",
+  "numeroDocumento": "900123456",
+  "telefono": "3009999999",
+  "correo": "actualizado@prueba.com",
+  "direccion": "Carrera 60 # 30-20",
+  "barrio": "Laureles",
+  "ciudad": "Medellin",
+  "departamento": "Antioquia",
+  "estado": true
+}
+
+### ==============================
+### ELIMINAR CLIENTE
+### NO EJECUTAR TODAVIA
+### ==============================
+
+DELETE http://localhost:8080/clientes/1
+
+### CREAR CLIENTE NUEVO PARA INSTALACION
+POST http://localhost:8080/clientes
+Content-Type: application/json
+
+{
+  "nombres": "Cliente Instalacion",
+  "apellidos": "Prueba",
+  "tipoDocumento": "NIT",
+  "numeroDocumento": "900123458",
+  "telefono": "3001234567",
+  "correo": "instalacion@prueba.com",
+  "direccion": "Calle 50 # 40-30",
+  "barrio": "Centro",
+  "ciudad": "Medellin",
+  "departamento": "Antioquia",
+  "estado": true
+}
+### ============================================
+### CREAR ORDEN DE SERVICIO
+### ============================================
+
+POST http://localhost:8080/ordenes-servicio
+Content-Type: application/json
+
+{
+  "numeroOrden": "OS-2026-002",
+  "idCliente": 6,
+  "idInstalacion": 5,
+  "idTecnicoAsignado":2,
+  "tipoServicio": "Soporte técnico",
+  "descripcionProblema": "Cliente reporta pérdida intermitente de señal satelital",
+  "prioridad": "MEDIA",
+  "estado": "PENDIENTE",
+  "fechaAsignacion": null,
+  "fechaProgramada": null,
+  "fechaCierre": null,
+  "observacionesCierre": null
+}
+
+
+### ============================================
+### LISTAR ORDENES DE SERVICIO
+### ============================================
+
+GET http://localhost:8080/ordenes-servicio
+
+
+### ============================================
+### BUSCAR ORDEN POR ID
+### ============================================
+
+GET http://localhost:8080/ordenes-servicio/6
+
+
+### ============================================
+### ACTUALIZAR ORDEN
+### ============================================
+
+PUT http://localhost:8080/ordenes-servicio/6
+Content-Type: application/json
+
+{
+  "numeroOrden": "OS-2026-002",
+  "idCliente": 6,
+  "idInstalacion": 5,
+  "idTecnicoAsignado": 2,
+  "tipoServicio": "Soporte técnico",
+  "descripcionProblema": "Cliente reporta pérdida intermitente de señal satelital",
+  "prioridad": "ALTA",
+  "estado": "CERRADA",
+  "fechaAsignacion": null,
+  "fechaProgramada": null,
+  "fechaCierre": "2026-08-26T20:15:00",
+  "observacionesCierre": "Falla solucionada, señal verificada y servicio finalizado"
+}
+
+
+### ============================================
+### ELIMINAR ORDEN
+### ============================================
+
+DELETE http://localhost:8080/ordenes-servicio/1
+
+POST http://localhost:8080/tecnicos
+Content-Type: application/json
+
+{
+  "usuario": null,
+  "nombres": "Carlos",
+  "apellidos": "Ramirez",
+  "tipoDocumento": "CC",
+  "numeroDocumento": "100000002",
+  "telefono": "3001234567",
+  "correo": "carlos.tecnico2@prueba.com",
+  "direccion": "Calle 10 # 20-30",
+  "ciudad": "Medellin",
+  "cargo": "Tecnico de campo",
+  "fechaIngreso": "2026-08-23",
+  "estado": true
+}
+### CREAR ASISTENCIA TECNICA
+
+POST http://localhost:8080/asistencias-tecnicas
+Content-Type: application/json
+
+{
+  "idOrden": 6,
+  "idTecnico": 2,
+  "fechaAsistencia": "2026-08-23",
+  "horaInicio": "16:10:00",
+  "horaFin": null,
+  "diagnostico": "Se detecta pérdida intermitente de señal satelital",
+  "estadoServicio": "EN PROCESO",
+  "observaciones": "Se inicia revisión técnica del sistema",
+  "firmaCliente": null,
+  "evidenciaFotografica": null
+}
+
+### ACTUALIZAR ASISTENCIA TECNICA
+PUT http://localhost:8080/asistencias-tecnicas/2
+Content-Type: application/json
+
+{
+  "idOrden": 6,
+  "idTecnico": 2,
+  "fechaAsistencia": "2026-08-23",
+  "horaInicio": "16:10:00",
+  "horaFin": "18:00:00",
+  "diagnostico": "Se detectó pérdida intermitente de señal satelital y se corrigió la orientación de la antena",
+  "estadoServicio": "FINALIZADO",
+  "observaciones": "Servicio finalizado correctamente. Señal verificada.",
+  "firmaCliente": null,
+  "evidenciaFotografica": null
+}
+
+### LISTAR ASISTENCIAS TECNICAS
+GET http://localhost:8080/asistencias-tecnicas
+
+### BUSCAR ASISTENCIA TECNICA POR ID
+GET http://localhost:8080/asistencias-tecnicas/2
+
+### CREAR ASISTENCIA FALLA
+
+POST http://localhost:8080/asistencia-fallas
+Content-Type: application/json
+
+{
+  "idAsistencia": 2,
+  "idTipoFalla": 2,
+  "detalle": "Se confirma pérdida intermitente de intensidad de señal durante la revisión técnica"
+}
+
+### LISTAR ASISTENCIAS FALLA
+
+GET http://localhost:8080/asistencia-fallas
+
+### BUSCAR ASISTENCIA FALLA POR ID
+
+GET http://localhost:8080/asistencia-fallas/5
+
+### ACTUALIZAR ASISTENCIA FALLA
+
+PUT http://localhost:8080/asistencia-fallas/5
+Content-Type: application/json
+
+{
+  "idAsistencia": 2,
+  "idTipoFalla": 2,
+  "detalle": "Falla revisada y actualizada durante la asistencia técnica"
+}
+
+### ELIMINAR ASISTENCIA FALLA
+
+DELETE http://localhost:8080/asistencia-fallas/1
+
+### ==============================
+### CREAR SOLUCION
+### ==============================
+
+POST http://localhost:8080/soluciones
+Content-Type: application/json
+
+{
+    "nombreSolucion": "Realineación de antena",
+    "descripcion": "Realizar ajuste de orientación y alineación de la antena satelital",
+    "estado": true
+}
+
+### ==============================
+### LISTAR SOLUCIONES
+### ==============================
+
+GET http://localhost:8080/soluciones
+
+### ==============================
+### BUSCAR SOLUCION POR ID
+### ==============================
+
+GET http://localhost:8080/soluciones/1
+
+### ==============================
+### ACTUALIZAR SOLUCION
+### ==============================
+
+PUT http://localhost:8080/soluciones/1
+Content-Type: application/json
+
+{
+    "nombreSolucion": "Realineación de antena actualizada",
+    "descripcion": "Ajuste y verificación de la orientación de la antena",
+    "estado": true
+}
+
+### ==============================
+### ELIMINAR SOLUCION
+### ==============================
+
+DELETE http://localhost:8080/soluciones/1
+
+### ==============================
+### CREAR RELACION TIPO FALLA - SOLUCION
+### ==============================
+
+POST http://localhost:8080/tipo-falla-soluciones
+Content-Type: application/json
+
+{
+  "idTipoFalla": 2,
+  "idSolucion": 4
+}
+
+### ==============================
+### LISTAR RELACIONES
+### ==============================
+
+GET http://localhost:8080/tipo-falla-soluciones
+
+### ==============================
+### BUSCAR RELACION POR ID
+### ==============================
+
+GET http://localhost:8080/tipo-falla-soluciones/2
+
+### ==============================
+### ACTUALIZAR RELACION
+### ==============================
+
+PUT http://localhost:8080/tipo-falla-soluciones/2
+Content-Type: application/json
+
+{
+  "idTipoFalla": 2,
+  "idSolucion": 1
+}
+
+### ==============================
+### ELIMINAR RELACION
+### ==============================
+
+DELETE http://localhost:8080/tipo-falla-soluciones/1
+
+### ==============================
+### CREAR ASISTENCIA - SOLUCION
+### ==============================
+
+POST http://localhost:8080/asistencia-soluciones
+Content-Type: application/json
+
+{
+  "idAsistencia": 2,
+  "idSolucion": 4,
+  "detalle": "Se aplica realineación de antena durante la asistencia técnica"
+}
+
+
+### ==============================
+### LISTAR ASISTENCIA - SOLUCIONES
+### ==============================
+
+GET http://localhost:8080/asistencia-soluciones
+
+
+### ==============================
+### BUSCAR POR ID
+### ==============================
+
+GET http://localhost:8080/asistencia-soluciones/2
+
+
+### ==============================
+### ACTUALIZAR
+### ==============================
+
+PUT http://localhost:8080/asistencia-soluciones/2
+Content-Type: application/json
+
+{
+  "idAsistencia": 2,
+  "idSolucion": 4,
+  "detalle": "Realineación realizada y funcionamiento verificado"
+}
+
+
+### ==============================
+### ELIMINAR
+### ==============================
+
+DELETE http://localhost:8080/asistencia-soluciones/1
+
+### ==============================
+### CREAR MATERIAL
+### ==============================
+
+POST http://localhost:8080/materiales
+Content-Type: application/json
+
+{
+  "nombreMaterial": "Cable coaxial prueba 2",
+  "descripcion": "Cable utilizado para conexión de señal satelital",
+  "unidadMedida": "Metro",
+  "cantidadStock": 100.00,
+  "estado": true
+}
+
+
+### ==============================
+### LISTAR MATERIALES
+### ==============================
+
+GET http://localhost:8080/materiales
+
+
+### ==============================
+### BUSCAR MATERIAL POR ID
+### ==============================
+
+GET http://localhost:8080/materiales/3
+
+
+### ==============================
+### ACTUALIZAR MATERIAL
+### ==============================
+
+PUT http://localhost:8080/materiales/3
+Content-Type: application/json
+
+{
+  "nombreMaterial": "Cable coaxial RG6",
+  "descripcion": "Cable coaxial para instalaciones satelitales",
+  "unidadMedida": "Metro",
+  "cantidadStock": 95.00,
+  "estado": true
+}
+
+
+### ==============================
+### ELIMINAR MATERIAL
+### ==============================
+
+DELETE http://localhost:8080/materiales/1
+
+### ==============================
+### CREAR DETALLE MATERIAL
+### ==============================
+
+POST http://localhost:8080/detalle-materiales
+Content-Type: application/json
+
+{
+  "idAsistencia": 2,
+  "idMaterial": 3,
+  "cantidadUtilizada": 5.00,
+  "observaciones": "Se utilizaron 5 metros de cable coaxial durante la asistencia"
+}
+
+
+### ==============================
+### LISTAR DETALLES MATERIAL
+### ==============================
+
+GET http://localhost:8080/detalle-materiales
+
+
+### ==============================
+### BUSCAR DETALLE MATERIAL POR ID
+### ==============================
+
+GET http://localhost:8080/detalle-materiales/3
+
+
+### ==============================
+### ACTUALIZAR DETALLE MATERIAL
+### ==============================
+
+PUT http://localhost:8080/detalle-materiales/3
+Content-Type: application/json
+
+{
+  "idAsistencia": 2,
+  "idMaterial": 3,
+  "cantidadUtilizada": 6.50,
+  "observaciones": "Cantidad actualizada después de finalizar la instalación"
+}
+
+
+### ==============================
+### ELIMINAR DETALLE MATERIAL
+### ==============================
+
+DELETE http://localhost:8080/detalle-materiales/1
+
+### ==============================
+### CREAR INSTALACION - EQUIPO
+### ==============================
+
+POST http://localhost:8080/instalacion-equipos
+Content-Type: application/json
+
+{
+  "idInstalacion": 5,
+  "idEquipo": 5,
+  "fechaAsignacion": "2026-08-24",
+  "fechaRetiro": null,
+  "estado": "INSTALADO"
+}
+
+
+### ==============================
+### LISTAR INSTALACION - EQUIPOS
+### ==============================
+
+GET http://localhost:8080/instalacion-equipos
+
+
+### ==============================
+### BUSCAR POR ID
+### ==============================
+
+GET http://localhost:8080/instalacion-equipos/2
+
+
+### ==============================
+### ACTUALIZAR
+### ==============================
+
+PUT http://localhost:8080/instalacion-equipos/2
+Content-Type: application/json
+
+{
+  "idInstalacion": 4,
+  "idEquipo": 2,
+  "fechaAsignacion": "2026-08-24",
+  "fechaRetiro": null,
+  "estado": "EN SERVICIO"
+}
+
+
+### ==============================
+### ELIMINAR
+### ==============================
+
+DELETE http://localhost:8080/instalacion-equipos/2
+
+### ==============================
+### VERIFICACION RAPIDA FINAL
+### ==============================
+
+### Cliente
+GET http://localhost:8080/clientes/6
+
+###
+
+### Instalacion
+GET http://localhost:8080/instalaciones/5
+
+###
+
+### Equipo
+GET http://localhost:8080/equipos/5
+
+###
+
+### Orden
+GET http://localhost:8080/ordenes-servicio/6
+
+###
+
+### Asistencia tecnica
+GET http://localhost:8080/asistencias-tecnicas/2
+
+###
+
+### Asistencia falla
+GET http://localhost:8080/asistencia-fallas/5
+
+###
+
+### Solucion
+GET http://localhost:8080/soluciones/4
+
+###
+
+### Tipo falla - solucion
+GET http://localhost:8080/tipo-falla-soluciones/2
+
+###
+
+### Asistencia - solucion
+GET http://localhost:8080/asistencia-soluciones/2
+
+###
+
+### Material
+GET http://localhost:8080/materiales/3
+
+###
+
+### Detalle material
+GET http://localhost:8080/detalle-materiales/3
+
+###
+
+### Instalacion - equipo
+GET http://localhost:8080/instalacion-equipos/3
+
+### CREAR USUARIO PARA LOGIN FRONTEND
+POST http://localhost:8080/usuarios
+Content-Type: application/json
+
+{
+    "nombreUsuario": "Administrador Web",
+    "correo": "adminweb@prueba.com",
+    "contrasena": "Admin123*",
+    "estado": true,
+    "rol": {
+        "idRol": 1
+    }
+}
+
+### CREAR USUARIO VICENTE PARA LOGIN
+
+POST http://localhost:8080/usuarios
+Content-Type: application/json
+
+{
+    "nombreUsuario": "Vicente",
+    "correo": "vicentee1385@gmail.com",
+    "contrasena": "Vice1385",
+    "estado": true,
+    "rol": {
+        "idRol": 1
+    }
+}
+
+### CREAR TIPO DE FALLA - PERDIDA TOTAL DE SEÑAL
+
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "Pérdida total de señal",
+    "descripcion": "Ausencia total de señal en uno o varios puntos del sistema de televisión satelital.",
+    "categoria": "Señal",
+    "estado": true
+}
+
+### FALLA - LNB SIN SEÑAL
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "LNB sin señal",
+    "descripcion": "El LNB o foco de la antena no entrega señal al sistema.",
+    "categoria": "LNB",
+    "estado": true
+}
+
+###
+### FALLA - LNB DEFECTUOSO
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "LNB defectuoso",
+    "descripcion": "El LNB o foco presenta funcionamiento defectuoso o intermitente.",
+    "categoria": "LNB",
+    "estado": true
+}
+
+###
+### FALLA - PUERTO DE SWITCH DEFECTUOSO
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "Puerto de switch defectuoso",
+    "descripcion": "Un puerto del switch presenta falla y afecta los dispositivos conectados a ese puerto dentro de la distribución, desde el LNB hasta los decodificadores.",
+    "categoria": "Distribución",
+    "estado": true
+}
+
+###
+### FALLA - SWITCH SIN FUNCIONAMIENTO
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "Switch sin funcionamiento",
+    "descripcion": "El switch no distribuye correctamente la señal hacia los dispositivos conectados.",
+    "categoria": "Distribución",
+    "estado": true
+}
+
+###
+### FALLA - TAP DEFECTUOSO
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "TAP defectuoso",
+    "descripcion": "El TAP presenta una falla que afecta la derivación o distribución de la señal.",
+    "categoria": "Distribución",
+    "estado": true
+}
+
+###
+### FALLA - PUERTO DE TAP DEFECTUOSO
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "Puerto de TAP defectuoso",
+    "descripcion": "Uno de los puertos del TAP no entrega correctamente la señal al punto conectado.",
+    "categoria": "Distribución",
+    "estado": true
+}
+
+###
+### FALLA - CABLE COAXIAL DAÑADO
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "Cable coaxial dañado",
+    "descripcion": "El cable coaxial presenta daño físico, deterioro o interrupción que afecta la transmisión de la señal.",
+    "categoria": "Cableado coaxial",
+    "estado": true
+}
+
+###
+### FALLA - CONECTOR COAXIAL DEFECTUOSO
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "Conector coaxial defectuoso",
+    "descripcion": "El conector del cable coaxial presenta daño, mala instalación o falso contacto.",
+    "categoria": "Cableado coaxial",
+    "estado": true
+}
+
+###
+### FALLA - CABLE ELÉCTRICO DAÑADO
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "Cable eléctrico dañado",
+    "descripcion": "El cable eléctrico utilizado para alimentar los equipos o la red presenta daño o interrupción.",
+    "categoria": "Alimentación eléctrica",
+    "estado": true
+}
+
+###
+### FALLA - TOMA ELÉCTRICA SIN ENERGÍA
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "Toma eléctrica sin energía",
+    "descripcion": "La toma eléctrica que alimenta los equipos de la red no suministra energía.",
+    "categoria": "Alimentación eléctrica",
+    "estado": true
+}
+
+###
+### FALLA - DECODIFICADOR SIN ENCENDER
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "Decodificador sin encender",
+    "descripcion": "El decodificador no enciende o no recibe alimentación eléctrica.",
+    "categoria": "Decodificador",
+    "estado": true
+}
+
+###
+### FALLA - DECODIFICADOR SIN SEÑAL
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "Decodificador sin señal",
+    "descripcion": "El decodificador enciende pero no recibe o no procesa correctamente la señal.",
+    "categoria": "Decodificador",
+    "estado": true
+}
+
+###
+### FALLA - DECODIFICADOR DEFECTUOSO
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "Decodificador defectuoso",
+    "descripcion": "El decodificador presenta una falla de funcionamiento que impide prestar correctamente el servicio.",
+    "categoria": "Decodificador",
+    "estado": true
+}
+
+###
+### FALLA - TARJETA NO RECONOCIDA
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "Tarjeta no reconocida",
+    "descripcion": "El decodificador no reconoce correctamente la tarjeta asociada al servicio.",
+    "categoria": "Tarjeta",
+    "estado": true
+}
+
+###
+### FALLA - TARJETA DEFECTUOSA
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "Tarjeta defectuosa",
+    "descripcion": "La tarjeta presenta una falla que impide la correcta habilitación o funcionamiento del servicio.",
+    "categoria": "Tarjeta",
+    "estado": true
+}
+###
+### FALLA - ANTENA DESALINEADA
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "Antena desalineada",
+    "descripcion": "La antena presenta una orientación incorrecta que reduce o impide la correcta recepción de la señal satelital.",
+    "categoria": "Antena",
+    "estado": true
+}
+
+###
+### FALLA - ANTENA CON DAÑO FÍSICO
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "Antena con daño físico",
+    "descripcion": "La antena, su soporte o alguno de sus elementos presenta deterioro o daño físico que afecta la recepción.",
+    "categoria": "Antena",
+    "estado": true
+}
+
+###
+### FALLA - CONEXIÓN DE LNB DEFECTUOSA
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "Conexión de LNB defectuosa",
+    "descripcion": "La conexión entre el LNB y el cable coaxial presenta falso contacto, mala instalación o deterioro.",
+    "categoria": "LNB",
+    "estado": true
+}
+
+###
+### FALLA - SWITCH SIN ALIMENTACIÓN
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "Switch sin alimentación",
+    "descripcion": "El switch no recibe la alimentación eléctrica necesaria para operar y distribuir correctamente la señal.",
+    "categoria": "Distribución",
+    "estado": true
+}
+
+###
+### FALLA - TAP SIN SEÑAL DE ENTRADA
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "TAP sin señal de entrada",
+    "descripcion": "El TAP no recibe señal desde la red troncal o desde el elemento de distribución anterior.",
+    "categoria": "Distribución",
+    "estado": true
+}
+
+###
+### FALLA - CABLE COAXIAL DESCONECTADO
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "Cable coaxial desconectado",
+    "descripcion": "El cable coaxial se encuentra desconectado en uno de sus extremos e interrumpe la transmisión de la señal.",
+    "categoria": "Cableado coaxial",
+    "estado": true
+}
+
+###
+### FALLA - PÉRDIDA DE SEÑAL POR CABLE COAXIAL
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "Pérdida de señal por cable coaxial",
+    "descripcion": "El cable coaxial presenta una atenuación excesiva que disminuye el nivel de señal sin producir necesariamente una interrupción total.",
+    "categoria": "Cableado coaxial",
+    "estado": true
+}
+
+###
+### FALLA - FUENTE DE ALIMENTACIÓN DEFECTUOSA
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "Fuente de alimentación defectuosa",
+    "descripcion": "La fuente de alimentación no suministra energía de forma correcta al equipo o elemento de la red.",
+    "categoria": "Alimentación eléctrica",
+    "estado": true
+}
+
+###
+### FALLA - DECODIFICADOR BLOQUEADO
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "Decodificador bloqueado",
+    "descripcion": "El decodificador enciende pero queda sin responder o no permite operar normalmente el servicio.",
+    "categoria": "Decodificador",
+    "estado": true
+}
+
+###
+### FALLA - TARJETA MAL INSERTADA
+POST http://localhost:8080/tipos-falla
+Content-Type: application/json
+
+{
+    "nombreFalla": "Tarjeta mal insertada",
+    "descripcion": "La tarjeta de acceso no se encuentra correctamente instalada en el decodificador y no puede ser reconocida.",
+    "categoria": "Tarjeta",
+    "estado": true
+}

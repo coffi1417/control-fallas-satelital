@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ficha del usuario</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="app-body">
+<div class="app-shell">
+  <aside class="app-sidebar">
+    <div class="brand-block"><div class="brand-mark">RF</div><div><strong>Control Satelital</strong><small>Registro de fallas</small></div></div>
+    <nav class="simple-nav">
+      <a href="dashboard.html">Inicio</a>
+      <a href="registro-atencion.html">Registrar atención</a>
+      <a class="active" href="historial.html">Ficha del usuario</a>
+      <a data-admin-only style="display:none" href="gestion-tecnicos.html">Gestión de técnicos</a>
+    </nav>
+    <button class="logout-btn" onclick="localStorage.removeItem('usuario');location.href='/'">Cerrar sesión</button>
+  </aside>
+  <main class="app-main">
+    <header class="page-header">
+      <div><p class="eyebrow">SEGUIMIENTO INDIVIDUAL</p><h1>Ficha del usuario</h1><p>Ingrese la cédula para consultar en una sola vista todas las atenciones, fallas, soluciones y reincidencias del usuario.</p></div>
+    </header>
+
+    <section class="user-search-card">
+      <div class="user-search-copy"><span class="search-step">1</span><div><h2>Buscar por cédula</h2><p>La consulta se realiza por la identificación del usuario, no por número de orden.</p></div></div>
+      <div class="user-search-controls"><input id="q" inputmode="numeric" autocomplete="off" placeholder="Ej. 1032456789"><button onclick="buscar()">Consultar usuario</button></div>
+      <p id="mensajeBusqueda" class="search-feedback"></p>
+    </section>
+
+    <section id="fichaUsuario" style="display:none">
+      <div class="section-heading ficha-heading"><div><p class="eyebrow">USUARIO ENCONTRADO</p><h2 id="nombreFicha">—</h2><p id="documentoFicha" class="muted"></p></div><button class="secondary-action" onclick="nuevaBusqueda()">Consultar otra cédula</button></div>
+      <section id="resumen" class="client-summary"></section>
+
+      <section class="content-card recurrence-card">
+        <div class="section-heading"><div><p class="eyebrow">ANÁLISIS DE REINCIDENCIAS</p><h2>Fallas recurrentes</h2><p class="muted">La reincidencia se identifica cuando el mismo componente técnico (Cableado, Antena, Amplificador, Decodificador, LNB, TAP, TAP/Amplificador o Conectores) aparece en dos o más atenciones, aunque la falla específica sea diferente.</p></div></div>
+        <div id="reincidencias"></div>
+      </section>
+
+      <section class="content-card">
+        <div class="section-heading"><div><p class="eyebrow">TRAZABILIDAD</p><h2>Historial de atenciones del usuario</h2><p class="muted">Cada registro conserva orden, fecha, falla, solución, materiales, técnico y estado.</p></div></div>
+        <div id="resultados"></div>
+      </section>
+    </section>
+
+    <section id="estadoInicial" class="content-card history-empty-guide"><div class="empty-icon">⌕</div><h2>Consulte un usuario</h2><p>Escriba su cédula arriba para visualizar la ficha y el historial completo.</p></section>
+  </main>
+</div>
+<script src="roles-ui.js"></script><script src="historial.js"></script>
+</body></html>
